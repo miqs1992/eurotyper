@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_07_181313) do
+ActiveRecord::Schema.define(version: 2021_02_21_150948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "match_days", force: :cascade do |t|
+    t.datetime "stop_bet_time", null: false
+    t.integer "day_number", null: false
+    t.bigint "round_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["day_number"], name: "index_match_days_on_day_number"
+    t.index ["round_id"], name: "index_match_days_on_round_id"
+  end
+
+  create_table "rounds", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "score_factor", default: 1, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +44,5 @@ ActiveRecord::Schema.define(version: 2021_02_07_181313) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "match_days", "rounds"
 end
