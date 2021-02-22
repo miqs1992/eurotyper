@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_21_150948) do
+ActiveRecord::Schema.define(version: 2021_02_21_154426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,8 +21,9 @@ ActiveRecord::Schema.define(version: 2021_02_21_150948) do
     t.bigint "round_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["day_number"], name: "index_match_days_on_day_number"
+    t.index ["day_number"], name: "index_match_days_on_day_number", unique: true
     t.index ["round_id"], name: "index_match_days_on_round_id"
+    t.index ["stop_bet_time"], name: "index_match_days_on_stop_bet_time", unique: true
   end
 
   create_table "rounds", force: :cascade do |t|
@@ -30,6 +31,17 @@ ActiveRecord::Schema.define(version: 2021_02_21_150948) do
     t.integer "score_factor", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_rounds_on_name", unique: true
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "flag", null: false
+    t.boolean "winner", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["flag"], name: "index_teams_on_flag", unique: true
+    t.index ["name"], name: "index_teams_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
