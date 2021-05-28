@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.6.6"
 
+gem "activeadmin"
 gem "bootsnap", ">= 1.4", require: false
 gem "devise"
 gem "jbuilder", "~> 2.7"
@@ -16,6 +17,7 @@ gem "webpacker", "~> 5.0"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
+  gem "capybara"
   gem "factory_bot_rails"
   gem "faker", github: "faker-ruby/faker", branch: "master"
   gem "rspec-rails"
@@ -24,6 +26,7 @@ group :development, :test do
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
+  gem "webdrivers"
 end
 
 group :development do
