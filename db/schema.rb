@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_21_154426) do
+ActiveRecord::Schema.define(version: 2021_05_28_133825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 2021_02_21_154426) do
     t.index ["day_number"], name: "index_match_days_on_day_number", unique: true
     t.index ["round_id"], name: "index_match_days_on_round_id"
     t.index ["stop_bet_time"], name: "index_match_days_on_stop_bet_time", unique: true
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.string "name"
+    t.integer "position", default: 0, null: false
+    t.integer "goals", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["goals"], name: "index_players_on_goals"
+    t.index ["team_id"], name: "index_players_on_team_id"
   end
 
   create_table "rounds", force: :cascade do |t|
@@ -52,9 +63,13 @@ ActiveRecord::Schema.define(version: 2021_02_21_154426) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "player_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["player_id"], name: "index_users_on_player_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "match_days", "rounds"
+  add_foreign_key "players", "teams"
+  add_foreign_key "users", "players"
 end
