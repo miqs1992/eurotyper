@@ -7,6 +7,4 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :player, optional: true
-
-  enum position: { goalkeeper: 0, defender: 1, midfielder: 2, forward: 3 }
 end

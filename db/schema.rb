@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_28_133825) do
+ActiveRecord::Schema.define(version: 2021_05_28_140354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,21 @@ ActiveRecord::Schema.define(version: 2021_05_28_133825) do
     t.index ["day_number"], name: "index_match_days_on_day_number", unique: true
     t.index ["round_id"], name: "index_match_days_on_round_id"
     t.index ["stop_bet_time"], name: "index_match_days_on_stop_bet_time", unique: true
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.bigint "match_day_id", null: false
+    t.bigint "team1_id", null: false
+    t.bigint "team2_id", null: false
+    t.datetime "start_time", null: false
+    t.integer "score1", default: 0, null: false
+    t.integer "score2", default: 0, null: false
+    t.boolean "finished", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["match_day_id"], name: "index_matches_on_match_day_id"
+    t.index ["team1_id"], name: "index_matches_on_team1_id"
+    t.index ["team2_id"], name: "index_matches_on_team2_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -70,6 +85,9 @@ ActiveRecord::Schema.define(version: 2021_05_28_133825) do
   end
 
   add_foreign_key "match_days", "rounds"
+  add_foreign_key "matches", "match_days"
+  add_foreign_key "matches", "teams", column: "team1_id"
+  add_foreign_key "matches", "teams", column: "team2_id"
   add_foreign_key "players", "teams"
   add_foreign_key "users", "players"
 end

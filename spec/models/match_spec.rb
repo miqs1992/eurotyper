@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-RSpec.describe Team do
+RSpec.describe Match, type: :model do
   it "has valid factory" do
-    expect(FactoryBot.create(:team)).to be_valid
+    expect(FactoryBot.create(:match)).to be_valid
   end
 end
