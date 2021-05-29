@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_28_143825) do
+ActiveRecord::Schema.define(version: 2021_05_29_071140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,20 @@ ActiveRecord::Schema.define(version: 2021_05_28_143825) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+  end
+
+  create_table "bets", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "match_id", null: false
+    t.boolean "bonus", default: false, null: false
+    t.integer "score1", default: 0, null: false
+    t.integer "score2", default: 0, null: false
+    t.integer "points", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["match_id"], name: "index_bets_on_match_id"
+    t.index ["user_id", "match_id"], name: "index_bets_on_user_id_and_match_id", unique: true
+    t.index ["user_id"], name: "index_bets_on_user_id"
   end
 
   create_table "match_days", force: :cascade do |t|
@@ -99,6 +113,8 @@ ActiveRecord::Schema.define(version: 2021_05_28_143825) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bets", "matches"
+  add_foreign_key "bets", "users"
   add_foreign_key "match_days", "rounds"
   add_foreign_key "matches", "match_days"
   add_foreign_key "matches", "teams", column: "team1_id"

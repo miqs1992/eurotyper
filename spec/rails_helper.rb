@@ -66,6 +66,7 @@ RSpec.configure do |config|
 
   config.include Devise::Test::IntegrationHelpers, type: :system
   config.include Warden::Test::Helpers
+  config.include ActiveSupport::Testing::TimeHelpers
 
   config.before(:each, type: :system) do
     driven_by :selenium_chrome_headless
