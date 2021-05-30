@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_29_071140) do
+ActiveRecord::Schema.define(version: 2021_05_29_125621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,9 +108,13 @@ ActiveRecord::Schema.define(version: 2021_05_29_071140) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "player_id"
     t.boolean "admin", default: false, null: false
+    t.bigint "team_id"
+    t.string "name"
+    t.integer "points", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["player_id"], name: "index_users_on_player_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["team_id"], name: "index_users_on_team_id"
   end
 
   add_foreign_key "bets", "matches"
@@ -121,4 +125,5 @@ ActiveRecord::Schema.define(version: 2021_05_29_071140) do
   add_foreign_key "matches", "teams", column: "team2_id"
   add_foreign_key "players", "teams"
   add_foreign_key "users", "players"
+  add_foreign_key "users", "teams"
 end

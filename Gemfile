@@ -8,6 +8,7 @@ ruby "2.6.6"
 gem "activeadmin"
 gem "bootsnap", ">= 1.4", require: false
 gem "devise"
+gem "haml"
 gem "jbuilder", "~> 2.7"
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
