@@ -1,24 +1,25 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
-    <span class="flag-icon flag-icon-gr"></span>
-    <span class="flag-icon flag-icon-gr flag-icon-squared"></span>
+    <div class="container">
+      <div class="row g-3 mt-3">
+        <div class="col-xs-12 col-sm-6">
+          <previous_match_day />
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <next_match_day />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import previous_match_day from "./components/previous_match_day";
+import next_match_day from "./components/next_match_day";
 export default {
-  data: function () {
-    return {
-      message: "Hello Vue!"
-    }
+  components: {
+    previous_match_day,
+    next_match_day
   }
 }
 </script>
-
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
-</style>

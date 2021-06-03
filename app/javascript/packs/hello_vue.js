@@ -6,7 +6,15 @@
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
 import Vue from 'vue'
+import VueResource from 'vue-resource';
 import App from '../app.vue'
+
+Vue.use(VueResource);
+
+const metaCSRF = document.querySelector('meta[name="csrf-token"]')
+if (metaCSRF) {
+  Vue.http.headers.common['X-CSRF-TOKEN'] = metaCSRF.getAttribute('content')
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({

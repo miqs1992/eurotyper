@@ -8,7 +8,7 @@
           = resource.errors.full_messages.first
     .row.justify-content-center
       .col-md-6
-        .box
+        .box.my-3
           .py-3.text-center
             %h2 Edit profile
           = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
