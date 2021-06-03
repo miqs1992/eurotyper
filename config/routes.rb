@@ -8,5 +8,8 @@ Rails.application.routes.draw do
       get :last
       get :next
     end
+    member do
+      put :update_bets
+    end
   end
 end

@@ -10,13 +10,13 @@
         <th scope="col">Match</th>
         <th scope="col">Score</th>
         <th scope="col">Bet</th>
-        <th scope="col" class="d-none d-sm-block">Points</th>
+        <th scope="col" class="d-none d-sm-table-cell">Points</th>
         <th scope="col" class="d-sm-none">P.</th>
       </tr>
       </thead>
       <tbody>
       <tr v-for="bet in matchDay.bets" :key="bet.id" class="text-center">
-        <td class="d-none d-sm-block">
+        <td class="d-none d-sm-table-cell">
           <span class="flag-icon" v-bind:class="'flag-icon-'+ bet.team1.flag"></span>
           {{ bet.team1.name }}
           -
@@ -33,7 +33,7 @@
           {{ bet.score1 }} - {{ bet.score2 }}
           <span v-if="bet.bonus">*</span>
         </td>
-        <th > {{ bet.points }} </th>
+        <th>{{ bet.points }}</th>
       </tr>
       </tbody>
     </table>

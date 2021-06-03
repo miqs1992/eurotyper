@@ -24,3 +24,21 @@ main.main {
     margin-bottom: 10px;
   }
 }
+
+.bi-spin {
+  animation: spin-animation 0.5s infinite;
+  display: inline-block;
+}
+
+@keyframes spin-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+.w-100px {
+  width: 100px;
+}

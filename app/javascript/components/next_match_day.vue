@@ -18,7 +18,7 @@
         </thead>
         <tbody>
         <tr v-for="bet in matchDay.bets" :key="bet.id" class="text-center">
-          <td class="d-none d-sm-block">
+          <td class="d-none d-sm-table-cell">
             <span class="flag-icon" v-bind:class="'flag-icon-'+ bet.team1.flag"></span>
             {{ bet.team1.name }}
             -
@@ -30,17 +30,30 @@
             -
             <span class="flag-icon" v-bind:class="'flag-icon-'+ bet.team2.flag"></span>
           </td>
-          <td class="p-1">
-            <input type="number" min="0" max="10" v-model="bet.score1">
+          <td class="p-2">
+            <input type="number"
+                   min="0"
+                   max="10"
+                   class="form-control py-0 pe-0"
+                   v-model="bet.score1"
+                   v-bind:class="{'is-valid': updateSuccess, 'is-invalid': updateFail}" >
           </td>
-          <td class="p-1">
-            <input type="number" min="0" max="10" v-model="bet.score2">
+          <td class="p-2">
+            <input type="number"
+                   min="0"
+                   max="10"
+                   class="form-control py-0 pe-0"
+                   v-model="bet.score2"
+                   v-bind:class="{'is-valid': updateSuccess, 'is-invalid': updateFail}" >
           </td>
         </tr>
         </tbody>
       </table>
       <div class="col-12">
-        <a class="btn btn-primary btn-sm float-end mb-3">
+        <a class="btn btn-outline-primary btn-sm float-end mb-3 w-100px text-center" v-if="updating">
+          <i class="bi bi-arrow-repeat bi-spin"></i>
+        </a>
+        <a class="btn btn-primary btn-sm float-end mb-3 w-100px text-center" @click.prevent="updateBets" v-else>
           Save
         </a>
       </div>
@@ -53,7 +66,24 @@ export default {
   data: function () {
     return {
       matchDay: null,
-      loading: true
+      loading: true,
+      updating: false,
+      updateSuccess: false,
+      updateFail: false
+    }
+  },
+
+  computed: {
+    betParams: function() {
+      let params = {}
+      this.matchDay.bets.forEach(bet => {
+        params[bet.id] = {
+          score1: bet.score1,
+          score2: bet.score2,
+          bonus: bet.bonus
+        }
+      })
+      return { bets: params };
     }
   },
 
@@ -66,6 +96,21 @@ export default {
       }, response => {
         console.log(response)
       });
+    },
+
+    updateBets() {
+      this.updating = true;
+      const id = this.matchDay.id
+      this.$http.put(`/match_days/${id}/update_bets`, this.betParams).then(() => {
+        this.updating = false;
+        this.updateSuccess = true;
+        setTimeout(() => { this.updateSuccess = false } , 2000)
+      }, () => {
+        this.updating = false;
+        this.getMatchDay();
+        this.updateFail = true;
+        setTimeout(() => { this.updateFail = false } , 2000)
+      })
     }
   },
 

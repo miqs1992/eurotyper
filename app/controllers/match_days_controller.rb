@@ -25,6 +25,19 @@ class MatchDaysController < ApplicationController
     end
   end
 
+  def update_bets
+    assign_bets
+    Bet.transaction do
+      @bets.update_all(bonus: false) # rubocop:disable Rails/SkipsModelValidations
+      @bets.each do |bet|
+        bet.update!(bet_params(params[:bets][bet.id.to_s]))
+      end
+      head :ok
+    rescue ActiveRecord::RecordInvalid
+      head :unprocessable_entity
+    end
+  end
+
   private
 
   def assign_bets
@@ -37,5 +50,9 @@ class MatchDaysController < ApplicationController
     @bets = @match_day.matches.includes(%i[team1 team2]).map do |match|
       match.bets.find_or_create_by(user: current_user)
     end
+  end
+
+  def bet_params(my_params)
+    my_params.permit(:score1, :score2, :bonus)
   end
 end
