@@ -2,9 +2,7 @@
 
 class MatchDaysController < ApplicationController
   def last
-    @match_day = MatchDay.where(stop_bet_time: ..Time.current)
-                         .order(stop_bet_time: :asc)
-                         .last
+    @match_day = MatchDay.previous
     if @match_day
       assign_bets
       render "match_day", match_day: @match_day
@@ -14,9 +12,7 @@ class MatchDaysController < ApplicationController
   end
 
   def next
-    @match_day = MatchDay.where(stop_bet_time: Time.current..)
-                         .order(stop_bet_time: :asc)
-                         .first
+    @match_day = MatchDay.next
     if @match_day
       create_bets
       render "match_day", match_day: @match_day

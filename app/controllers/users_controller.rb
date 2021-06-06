@@ -5,5 +5,6 @@ class UsersController < ApplicationController
 
   def me
     @user = current_user
+    @match_day = MatchDay.next
   end
 end
