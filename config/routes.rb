@@ -12,4 +12,11 @@ Rails.application.routes.draw do
       put :update_bets
     end
   end
+
+  resources :players, only: :index
+  resources :users, only: :index  do
+    collection do
+      get :me
+    end
+  end
 end
