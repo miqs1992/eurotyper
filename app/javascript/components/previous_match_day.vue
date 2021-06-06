@@ -4,6 +4,10 @@
       <h4>Previous match day</h4>
     </div>
     <div class="skeleton-loading big" v-if="loading"></div>
+    <div class="text-center p-2" v-else-if="!matchDay">
+      <i class="bi bi-exclamation-diamond-fill fs-2"></i>
+      <h5>No previous match day</h5>
+    </div>
     <table class="table table-striped" v-else>
       <thead>
       <tr class="text-center">
