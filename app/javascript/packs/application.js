@@ -8,7 +8,7 @@ import Rails from "@rails/ujs"
 import "bootstrap"
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../stylesheets/application"
-import "flag-icon-css/css/flag-icon.min.css"
+// import "flag-icon-css/css/flag-icon.min.css"
 
 Rails.start()
 // ActiveStorage.start()
