@@ -19,4 +19,8 @@ class MatchDay < ApplicationRecord
   def calculate
     bets.each(&:calculate)
   end
+
+  def display_name
+    "Match day #{day_number}"
+  end
 end

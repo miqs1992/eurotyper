@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Team do
+  menu parent: 'Teams'
   permit_params :name, :flag
 
   show do
