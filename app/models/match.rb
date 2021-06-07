@@ -13,6 +13,8 @@ class Match < ApplicationRecord
 
   delegate :round, to: :match_day
 
+  scope :finished, -> { where(finished: true) }
+
   def winner
     if score1 == score2
       :draw

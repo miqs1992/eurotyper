@@ -4,6 +4,7 @@ json.match_day do
   json.extract! @match_day, :id, :day_number
   json.stop_bet_time l(@match_day.stop_bet_time, format: :short)
   json.round_name @match_day.round.name
+  json.bonus_used @bonus_used
 
   json.bets @bets do |bet|
     json.extract! bet, :id, :score1, :score2, :points, :bonus

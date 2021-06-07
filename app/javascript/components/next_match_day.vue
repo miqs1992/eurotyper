@@ -14,6 +14,7 @@
         <tr class="text-center">
           <th scope="col">Match</th>
           <th scope="col" colspan="2">Bet</th>
+          <th scope="col" v-if="!matchDay.bonus_used">Bonus</th>
         </tr>
         </thead>
         <tbody>
@@ -45,6 +46,15 @@
                    class="form-control py-0 pe-0"
                    v-model="bet.score2"
                    v-bind:class="{'is-valid': updateSuccess, 'is-invalid': updateFail}" >
+          </td>
+          <td v-if="!matchDay.bonus_used">
+            <div>
+              <input class="form-check-input"
+                     type="checkbox"
+                     v-model="bet.bonus"
+                     v-bind:class="{'is-valid': updateSuccess, 'is-invalid': updateFail}"
+                     @change="flipBonus(bet.id)" >
+            </div>
           </td>
         </tr>
         </tbody>
@@ -110,6 +120,14 @@ export default {
         this.getMatchDay();
         this.updateFail = true;
         setTimeout(() => { this.updateFail = false } , 2000)
+      })
+    },
+
+    flipBonus(id) {
+      this.matchDay.bets.forEach(bet => {
+        if(bet.id !== id) {
+          bet.bonus = false
+        }
       })
     }
   },

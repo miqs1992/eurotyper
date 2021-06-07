@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.me do
   json.points @user.points
   json.main_league_place 3

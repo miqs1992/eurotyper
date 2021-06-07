@@ -14,6 +14,7 @@ class MatchDaysController < ApplicationController
   def next
     @match_day = MatchDay.next
     if @match_day
+      @bonus_used = bonus_used(@match_day.round)
       create_bets
       render "match_day", match_day: @match_day
     else
@@ -22,6 +23,7 @@ class MatchDaysController < ApplicationController
   end
 
   def update_bets
+    @match_day = MatchDay.find(params[:id])
     assign_bets
     Bet.transaction do
       @bets.update_all(bonus: false) # rubocop:disable Rails/SkipsModelValidations

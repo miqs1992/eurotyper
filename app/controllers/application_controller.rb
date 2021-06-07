@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     raise ActionController::RoutingError, "Not Found" unless current_user.admin?
   end
 
+  def bonus_used(round)
+    current_user.bets.where(match: round.matches.finished).exists?(bonus: true)
+  end
+
   protected
 
   def configure_permitted_parameters
