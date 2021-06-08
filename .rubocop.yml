@@ -37,6 +37,7 @@ Style/Documentation:
 Metrics/BlockLength:
   Exclude:
   - spec/**/*.rb
+  - app/admin/*.rb
 
 Metrics/MethodLength:
   Max: 20

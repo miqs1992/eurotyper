@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_29_125621) do
+ActiveRecord::Schema.define(version: 2021_06_08_184641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,13 @@ ActiveRecord::Schema.define(version: 2021_05_29_125621) do
     t.bigint "team_id"
     t.string "name"
     t.integer "points", default: 0, null: false
+    t.integer "league_rank", default: 0, null: false
+    t.integer "exact_bet_count", default: 0, null: false
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["player_id"], name: "index_users_on_player_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

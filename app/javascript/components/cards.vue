@@ -10,7 +10,7 @@
             <div class="card-body h-100 centered-text">
               <div class="skeleton-loading" v-if="loading"></div>
               <h5 class="card-title mb-0" v-else>
-                {{ me.points || "-" }}
+                {{ me.points || "0" }} points
               </h5>
             </div>
           </div>
@@ -27,7 +27,7 @@
             <div class="card-body h-100 centered-text">
               <div class="skeleton-loading" v-if="loading"></div>
               <h5 class="card-title mb-0" v-else>
-                {{ me.main_league_place || "-" }}
+                {{ me.main_league_place || "-" }} place
               </h5>
             </div>
           </div>
