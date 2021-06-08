@@ -1,3 +1,7 @@
+= content_for :head do
+  = javascript_pack_tag 'edit_registration'
+  = stylesheet_pack_tag 'edit_registration'
+
 = render("layouts/header")
 
 %main.main
@@ -33,12 +37,12 @@
                   = f.select :team_id,
                              Team.all.map { |p| [p.name, p.id] },
                              { include_blank: true },
-                             { class: "form-select", placeholder: "Select your winner" }
+                             { id: "team-select", placeholder: "Select your winner" }
                 .col-12
                   = f.label "Top scorer", for: :player_id, class: "form-label"
                   = f.select :player_id,
                              Player.all.map { |p| [p.name, p.id] },
                              { include_blank: true },
-                             { class: "form-select", placeholder: "Select your top scorer" }
+                             { id: "player-select", placeholder: "Select your top scorer" }
               .col-12.my-4
                 = f.submit "Update", class: "btn btn-primary float-end"
