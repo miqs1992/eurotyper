@@ -31,7 +31,7 @@
               .col-12
                 = f.label :current_password, class: "form-label"
                 = f.password_field :current_password, class: "form-control", autocomplete: "current-password"
-              - unless MatchDay.where("stop_bet_time > ?", Time.current).any?
+              - if MatchDay.previous.blank?
                 .col-12
                   = f.label "Winning team", for: :team_id, class: "form-label"
                   = f.select :team_id,
