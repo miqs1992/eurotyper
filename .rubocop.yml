@@ -11,6 +11,7 @@ AllCops:
     - 'config.ru'
     - 'Rakefile'
     - 'db/migrate/*'
+    - 'db/seeds.rb'
     - 'db/schema.rb'
     - 'config/**/*'
     - 'bin/*'
