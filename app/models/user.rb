@@ -25,7 +25,10 @@ class User < ApplicationRecord
   def calculate
     update(
       points: bets.sum(:points),
-      exact_bet_count: bets.includes(:match).count(&:exact_bet?)
+      exact_bet_count: bets.includes(:match)
+                           .joins(:match)
+                           .merge(Match.finished)
+                           .count(&:exact_bet?)
     )
   end
 
