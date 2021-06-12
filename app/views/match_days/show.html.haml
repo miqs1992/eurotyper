@@ -4,4 +4,4 @@
 = render("layouts/header")
 
 %main#main-vue.main
-  %home
+  %match-day{'match-day-url': match_day_path(@match_day, format: :json)}

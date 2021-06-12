@@ -47,6 +47,10 @@
 
 <script>
 export default {
+  props: {
+    usersUrl: String
+  },
+
   data: function () {
     return {
       users: [],
@@ -63,7 +67,7 @@ export default {
 
   methods: {
     getUsers() {
-      this.$http.get("/users", this.pageParams).then(response => {
+      this.$http.get(this.usersUrl, this.pageParams).then(response => {
         this.users = response.body.users;
         this.loading  = false;
       }, response => {

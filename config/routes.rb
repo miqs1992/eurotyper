@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'home#index'
 
-  resources :match_days, only: [] do
+  resources :match_days, only: :show do
     collection do
       get :last
       get :next

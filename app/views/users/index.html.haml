@@ -1,6 +1,7 @@
 = content_for :head do
-  = javascript_pack_tag 'users_index'
+  = javascript_pack_tag 'vue'
 
 = render("layouts/header")
 
-%main#main.main
+%main#main-vue.main
+  %users-list{'users-url': users_path(format: :json)}

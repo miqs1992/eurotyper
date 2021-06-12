@@ -36,6 +36,19 @@ class MatchDaysController < ApplicationController
     end
   end
 
+  def show
+    @match_day = MatchDay.find(params[:id])
+    raise ActiveRecord::RecordNotFound if @match_day.stop_bet_time.future?
+
+    respond_to do |format|
+      format.html
+      format.json do
+        @matches = @match_day.matches.includes(%i[team1 team2 bets])
+        @users = User.all.order(:name)
+      end
+    end
+  end
+
   private
 
   def assign_bets

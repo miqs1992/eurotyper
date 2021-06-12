@@ -21,11 +21,11 @@
 </template>
 
 <script>
-import previous_match_day from "./components/previous_match_day";
-import next_match_day from "./components/next_match_day";
-import best_scorers from "./components/best_scorers";
-import cards from "./components/cards";
-import top_users from "./components/top_users";
+import previous_match_day from "../components/previous_match_day";
+import next_match_day from "../components/next_match_day";
+import best_scorers from "../components/best_scorers";
+import cards from "../components/cards";
+import top_users from "../components/top_users";
 
 export default {
   components: {
