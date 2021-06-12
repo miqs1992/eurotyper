@@ -4,7 +4,7 @@
       <cards />
       <div class="row g-3">
         <div class="col-xs-12 col-sm-6">
-          <next_match_day />
+          <next_match_day match-day-url= "/match_days/next.json" />
         </div>
         <div class="col-xs-12 col-sm-6">
           <previous_match_day />

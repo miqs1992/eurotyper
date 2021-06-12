@@ -1,14 +1,20 @@
 <template>
   <div id="next-match-day" class="box h-100">
-    <div class="box-header">
-      <h4>Next match day</h4>
-    </div>
+
     <div class="skeleton-loading big" v-if="loading"></div>
-    <div class="text-center p-2" v-else-if="!matchDay">
-      <i class="bi bi-exclamation-diamond-fill fs-2"></i>
-      <h5>No next match day</h5>
-    </div>
+    <template v-else-if="!matchDay">
+      <div class="box-header">
+        <h4>Next match day</h4>
+      </div>
+      <div class="text-center p-2" >
+        <i class="bi bi-exclamation-diamond-fill fs-2"></i>
+        <h5>No next match day</h5>
+      </div>
+    </template>
     <template v-else>
+      <div class="box-header">
+        <h4> {{ matchDay.display_name }} </h4>
+      </div>
       <table class="table table-striped" >
         <thead>
         <tr class="text-center">
@@ -73,6 +79,10 @@
 
 <script>
 export default {
+  props: {
+    matchDayUrl: String
+  },
+
   data: function () {
     return {
       matchDay: null,
@@ -99,7 +109,7 @@ export default {
 
   methods: {
     getMatchDay() {
-      this.$http.get("/match_days/next").then(response => {
+      this.$http.get(this.matchDayUrl).then(response => {
         // get body data
         this.matchDay = response.body.match_day;
         this.loading  = false;

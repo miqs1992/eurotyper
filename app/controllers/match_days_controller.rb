@@ -38,18 +38,36 @@ class MatchDaysController < ApplicationController
 
   def show
     @match_day = MatchDay.find(params[:id])
-    raise ActiveRecord::RecordNotFound if @match_day.stop_bet_time.future?
-
-    respond_to do |format|
-      format.html
-      format.json do
-        @matches = @match_day.matches.includes(%i[team1 team2 bets])
-        @users = User.all.order(:name)
-      end
+    if @match_day.stop_bet_time.past?
+      after_bet_time
+    else
+      before_bet_time
     end
   end
 
   private
+
+  def before_bet_time
+    respond_to do |format|
+      format.html { render "before_bet_time" }
+      format.json do
+        @bonus_used = bonus_used(@match_day.round)
+        assign_bets
+        render "match_day"
+      end
+    end
+  end
+
+  def after_bet_time
+    respond_to do |format|
+      format.html { render "after_bet_time" }
+      format.json do
+        @matches = @match_day.matches.includes(%i[team1 team2 bets])
+        @users = User.all.order(:name)
+        render 'show'
+      end
+    end
+  end
 
   def assign_bets
     @bets = @match_day.bets

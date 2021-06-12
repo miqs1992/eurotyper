@@ -18,7 +18,7 @@
               Match Days
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% MatchDay.past.each do |match_day| %>
+              <% MatchDay.order(day_number: :asc).each do |match_day| %>
                 <li>
                   <%= link_to(match_day.display_name, match_day_path(match_day), class: "dropdown-item") %>
                 </li>

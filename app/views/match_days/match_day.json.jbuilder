@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 json.match_day do
-  json.extract! @match_day, :id, :day_number
+  json.extract! @match_day, :id, :day_number, :display_name
   json.stop_bet_time l(@match_day.stop_bet_time, format: :short)
   json.round_name @match_day.round.name
   json.bonus_used @bonus_used

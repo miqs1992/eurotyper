@@ -3,11 +3,13 @@ import VueResource from 'vue-resource';
 import Home from '../pages/home.vue'
 import UsersList from '../pages/users_list.vue';
 import MatchDay from '../pages/match_day.vue';
+import NextMatchDay from '../components/next_match_day';
 
 Vue.use(VueResource);
 Vue.component('home', Home);
 Vue.component('users-list', UsersList);
 Vue.component('match-day', MatchDay);
+Vue.component('next-match-day', NextMatchDay);
 
 const metaCSRF = document.querySelector('meta[name="csrf-token"]')
 if (metaCSRF) {
