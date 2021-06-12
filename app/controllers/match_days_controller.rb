@@ -52,7 +52,7 @@ class MatchDaysController < ApplicationController
       format.html { render "before_bet_time" }
       format.json do
         @bonus_used = bonus_used(@match_day.round)
-        assign_bets
+        create_bets
         render "match_day"
       end
     end
