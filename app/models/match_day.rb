@@ -8,6 +8,8 @@ class MatchDay < ApplicationRecord
   validates :day_number, presence: true, uniqueness: true
   validates :stop_bet_time, presence: true
 
+  scope :past, -> { where(stop_bet_time: ..Time.current).order(day_number: :asc) }
+
   def self.next
     where(stop_bet_time: Time.current..).order(stop_bet_time: :asc).first
   end

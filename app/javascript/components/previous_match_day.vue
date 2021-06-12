@@ -41,6 +41,11 @@
       </tr>
       </tbody>
     </table>
+    <div class="col-12">
+      <a class="btn btn-primary btn-sm float-end mb-3 text-center" :href="'/match_days/' + matchDay.id">
+        View match day
+      </a>
+    </div>
   </div>
 </template>
 
