@@ -5,12 +5,16 @@ class Bet < ApplicationRecord
   belongs_to :match
 
   delegate :match_day, to: :match
+  delegate :round, to: :match_day
 
   validates :score1, numericality: { greater_than_or_equal_to: 0 }
   validates :score2, numericality: { greater_than_or_equal_to: 0 }
   validates :points, numericality: { greater_than_or_equal_to: 0 }
   validates :user_id, uniqueness: { scope: :match_id }
   validate :stop_bet_time, if: -> { new_record? || score1_changed? || score2_changed? }
+  validate :bonus_used, if: -> { bonus_changed?(to: true ) }
+
+  scope :with_bonus, -> { where(bonus: true ) }
 
   def calculate
     return unless match.finished?
@@ -50,5 +54,11 @@ class Bet < ApplicationRecord
     return if match.nil?
 
     errors.add(:base, "It is too late for changing") if match.match_day.stop_bet_time.past?
+  end
+
+  def bonus_used
+    return unless Bet.where(match: round.matches).with_bonus.exists?(user_id: user_id)
+
+    errors.add(:bonus, "Bonus already used!")
   end
 end

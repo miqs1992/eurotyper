@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.extract! @match_day, :id, :display_name, :stop_bet_time
 json.users @users do |user|
   json.extract! user, :id, :name

@@ -14,7 +14,7 @@ class MatchDaysController < ApplicationController
   def next
     @match_day = MatchDay.next
     if @match_day
-      @bonus_used = bonus_used(@match_day.round)
+      bonus_used
       create_bets
       render "match_day", match_day: @match_day
     else
@@ -51,7 +51,7 @@ class MatchDaysController < ApplicationController
     respond_to do |format|
       format.html { render "before_bet_time" }
       format.json do
-        @bonus_used = bonus_used(@match_day.round)
+        bonus_used
         create_bets
         render "match_day"
       end
@@ -64,7 +64,7 @@ class MatchDaysController < ApplicationController
       format.json do
         @matches = @match_day.matches.includes(%i[team1 team2 bets])
         @users = User.all.order(:name)
-        render 'show'
+        render "show"
       end
     end
   end
@@ -83,5 +83,10 @@ class MatchDaysController < ApplicationController
 
   def bet_params(my_params)
     my_params.permit(:score1, :score2, :bonus)
+  end
+
+  def bonus_used
+    matches = @match_day.round.matches.where.not(match_day_id: @match_day.id)
+    @bonus_used = current_user.bets.with_bonus.exists?(match: matches)
   end
 end
