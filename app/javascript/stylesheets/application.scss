@@ -64,3 +64,16 @@ main.main {
     }
   }
 }
+
+table {
+  .no-break {
+    white-space: nowrap;
+    background-color: white;
+  }
+
+  .sticky {
+    left: 0;
+    position: sticky;
+    z-index: 2;
+  }
+}
