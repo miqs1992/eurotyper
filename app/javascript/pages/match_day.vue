@@ -10,7 +10,7 @@
             <h4> {{ name }}</h4>
           </div>
           <div class="table-responsive">
-            <table class="table">
+            <table class="table table-striped">
               <thead>
               <tr class="text-center">
                 <th scope="col"></th>
@@ -25,7 +25,7 @@
               </thead>
               <tbody>
               <tr v-for="user in users" :key="user.id" class="text-center">
-                <th class="sticky"> {{user.name}} </th>
+                <th class="sticky no-break"> {{user.name}} </th>
                 <template v-for="match in matches">
                   <td class="no-break">
                     {{ bets[match.id][user.id] && bets[match.id][user.id].score1 }}
