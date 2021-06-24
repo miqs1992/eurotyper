@@ -2,7 +2,7 @@
   <div class="container" id="users-list">
     <div class="row">
       <div class="col-12">
-        <div class="box mt-3">
+        <div class="box my-3">
           <div class="box-header">
             <h4>Current ranking</h4>
           </div>

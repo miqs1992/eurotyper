@@ -2,7 +2,7 @@
   <div class="container" id="users-list">
     <div class="row">
       <div class="col-12">
-        <div class="box mt-3" v-if="loading">
+        <div class="box my-3" v-if="loading">
           <div class="skeleton-loading big" ></div>
         </div>
         <div class="box mt-3" v-else>

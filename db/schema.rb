@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_08_184641) do
+ActiveRecord::Schema.define(version: 2021_06_24_140124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2021_06_08_184641) do
     t.boolean "bonus", default: false, null: false
     t.integer "score1", default: 0, null: false
     t.integer "score2", default: 0, null: false
-    t.integer "points", default: 0, null: false
+    t.decimal "points", precision: 6, scale: 2, default: "0.0", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["match_id"], name: "index_bets_on_match_id"
@@ -76,13 +76,14 @@ ActiveRecord::Schema.define(version: 2021_06_08_184641) do
     t.integer "goals", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "assists", default: 0, null: false
     t.index ["goals"], name: "index_players_on_goals"
     t.index ["team_id"], name: "index_players_on_team_id"
   end
 
   create_table "rounds", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "score_factor", default: 1, null: false
+    t.decimal "score_factor", precision: 6, scale: 2, default: "1.0", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_rounds_on_name", unique: true
@@ -110,7 +111,7 @@ ActiveRecord::Schema.define(version: 2021_06_08_184641) do
     t.boolean "admin", default: false, null: false
     t.bigint "team_id"
     t.string "name"
-    t.integer "points", default: 0, null: false
+    t.decimal "points", precision: 6, scale: 2, default: "0.0", null: false
     t.integer "league_rank", default: 0, null: false
     t.integer "exact_bet_count", default: 0, null: false
     t.integer "sign_in_count", default: 0, null: false

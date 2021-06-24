@@ -6,15 +6,16 @@ class Bet < ApplicationRecord
 
   delegate :match_day, to: :match
   delegate :round, to: :match_day
+  delegate :score_factor, to: :round
 
   validates :score1, numericality: { greater_than_or_equal_to: 0 }
   validates :score2, numericality: { greater_than_or_equal_to: 0 }
   validates :points, numericality: { greater_than_or_equal_to: 0 }
   validates :user_id, uniqueness: { scope: :match_id }
   validate :stop_bet_time, if: -> { new_record? || score1_changed? || score2_changed? }
-  validate :bonus_used, if: -> { bonus_changed?(to: true ) }
+  validate :bonus_used, if: -> { bonus_changed?(to: true) }
 
-  scope :with_bonus, -> { where(bonus: true ) }
+  scope :with_bonus, -> { where(bonus: true) }
 
   def calculate
     return unless match.finished?
@@ -40,14 +41,14 @@ class Bet < ApplicationRecord
 
   def points_value
     value = if exact_bet?
-              3
+              3.0
             elsif winner == match.winner
-              1
+              1.0
             else
-              0
+              0.0
             end
-    value *= 2 if bonus?
-    value
+    value *= 2.0 if bonus?
+    value * score_factor
   end
 
   def stop_bet_time

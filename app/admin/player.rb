@@ -2,5 +2,5 @@
 
 ActiveAdmin.register Player do
   menu parent: "Teams"
-  permit_params :name, :position, :goals, :team_id
+  permit_params :name, :position, :goals, :assists, :team_id
 end

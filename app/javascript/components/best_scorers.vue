@@ -9,8 +9,10 @@
       <tr class="text-center">
         <th scope="col">Name</th>
         <th scope="col">Team</th>
-        <th scope="col" class="d-none d-sm-table-cell">Position</th>
-        <th scope="col">Goals</th>
+        <th scope="col" class="d-none d-sm-table-cell">Goals</th>
+        <th scope="col" class="d-none d-sm-table-cell">Assists</th>
+        <th scope="col" class="d-sm-none">G.</th>
+        <th scope="col" class="d-sm-none">A.</th>
       </tr>
       </thead>
       <tbody>
@@ -23,8 +25,8 @@
         <td class="d-sm-none">
           <span class="flag-icon" v-bind:class="'flag-icon-'+ player.team.flag"></span>
         </td>
-        <td class="d-none d-sm-table-cell"> {{ player.position }} </td>
         <th>{{ player.goals }}</th>
+        <th>{{ player.assists }}</th>
       </tr>
       </tbody>
     </table>
