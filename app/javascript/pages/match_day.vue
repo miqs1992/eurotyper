@@ -5,7 +5,7 @@
         <div class="box my-3" v-if="loading">
           <div class="skeleton-loading big" ></div>
         </div>
-        <div class="box mt-3" v-else>
+        <div class="box my-3" v-else>
           <div class="box-header" >
             <h4> {{ name }}</h4>
           </div>
