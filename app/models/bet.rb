@@ -16,15 +16,16 @@ class Bet < ApplicationRecord
   validate :bonus_used, if: -> { bonus_changed?(to: true) }
 
   scope :with_bonus, -> { where(bonus: true) }
+  scope :exact, -> { where(exact: true) }
 
   def calculate
     return unless match.finished?
 
-    update(points: points_value)
+    update(points: points_value, exact: exact_bet?)
   end
 
   def exact_bet?
-    match.score1 == score1 && match.score2 == score2
+    @exact_bet ||= match.score1 == score1 && match.score2 == score2
   end
 
   def winner
