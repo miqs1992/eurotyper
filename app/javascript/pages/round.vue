@@ -37,13 +37,13 @@
 <script>
 export default {
   props: {
-    roundUrl: String
+    roundUrl: String,
+    name: String
   },
 
   data: function () {
     return {
       users: [],
-      name: "",
       loading: true
     }
   },
@@ -51,7 +51,6 @@ export default {
   methods: {
     getUsers() {
       this.$http.get(this.roundUrl).then(response => {
-        this.name = response.body.name;
         this.users = response.body.users.sort((u1, u2) => {
           if(u2.points === u1.points) {
             return u2.exact_bet_count - u1.exact_bet_count;

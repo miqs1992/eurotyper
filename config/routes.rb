@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'home#index'
 
-  resources :rounds, only: :show
+  resources :rounds, only: :show do
+    collection do
+      get :group
+      get :knockout
+    end
+  end
+
   resources :match_days, only: :show do
     collection do
       get :last

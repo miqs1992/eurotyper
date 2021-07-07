@@ -7,5 +7,5 @@
   .container
     .row
       .col-12.mt-3
-        %round{'round-url': round_path(@round, format: :json),
-               name: @round.name}
+        %round{'round-url': group_rounds_path(format: :json),
+               name: "Group stage"}
