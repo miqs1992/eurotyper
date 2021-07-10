@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_07_152925) do
+ActiveRecord::Schema.define(version: 2021_07_10_073555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,7 +78,9 @@ ActiveRecord::Schema.define(version: 2021_07_07_152925) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "assists", default: 0, null: false
+    t.boolean "king", default: false, null: false
     t.index ["goals"], name: "index_players_on_goals"
+    t.index ["king"], name: "index_players_on_king"
     t.index ["team_id"], name: "index_players_on_team_id"
   end
 
@@ -99,6 +101,7 @@ ActiveRecord::Schema.define(version: 2021_07_07_152925) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["flag"], name: "index_teams_on_flag", unique: true
     t.index ["name"], name: "index_teams_on_name", unique: true
+    t.index ["winner"], name: "index_teams_on_winner"
   end
 
   create_table "users", force: :cascade do |t|

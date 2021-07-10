@@ -13,7 +13,9 @@ class User < ApplicationRecord
   validate :stop_bet_time, if: -> { team_id_changed? || player_id_changed? }
 
   def self.calculate
-    unscoped.all.find_each(&:calculate)
+    king_id = Player.king&.id
+    winner_id = Team.winner&.id
+    unscoped.all.find_each { |user| user.calculate(winner_id, king_id) }
     rank = 1
     unscoped.all.order(points: :desc, exact_bet_count: :desc).each do |user|
       user.update(league_rank: rank)
@@ -22,14 +24,17 @@ class User < ApplicationRecord
     true
   end
 
-  def calculate
+  private
+
+  def calculate(winner_id = nil, king_id = nil)
+    new_points = bets.sum(:points)
+    new_points += 7 if team_id && team_id == winner_id
+    new_points += 5 if player_id && player_id == king_id
     update(
-      points: bets.sum(:points),
+      points: new_points,
       exact_bet_count: bets.exact.count
     )
   end
-
-  private
 
   def stop_bet_time
     return unless MatchDay.where("stop_bet_time < ?", Time.current).any?

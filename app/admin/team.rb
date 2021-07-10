@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Team do
   menu parent: "Teams"
-  permit_params :name, :flag
+  permit_params :name, :flag, :winner
 
   show do
     columns do
@@ -12,6 +12,7 @@ ActiveAdmin.register Team do
           row :flag do |team|
             "<span class='flag-icon flag-icon-#{team.flag}'></span>".html_safe # rubocop:disable Rails/OutputSafety
           end
+          row :winner
         end
       end
       column do
