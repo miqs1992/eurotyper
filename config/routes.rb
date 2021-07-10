@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   end
 
   resources :players, only: :index
-  resources :users, only: :index  do
+  resources :users, only: %i(index show)  do
     collection do
       get :me
     end
