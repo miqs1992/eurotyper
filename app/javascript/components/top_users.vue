@@ -16,7 +16,7 @@
       <tbody>
       <tr v-for="user in users" :key="user.id" class="text-center">
         <th> {{ user.league_rank }} </th>
-        <td> {{ user.name }} </td>
+        <td><a class="link-dark" :href="user.show_path">{{ user.name }}</a></td>
         <td> {{ user.points }} </td>
         <td class="d-none d-sm-table-cell"> {{ user.exact_bet_count }} </td>
       </tr>

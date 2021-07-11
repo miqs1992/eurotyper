@@ -2,6 +2,7 @@
 
 json.users @users do |user|
   json.extract! user, :id, :name, :points, :exact_bet_count, :league_rank
+  json.show_path user_path(user)
   if @extended
     json.team do
       json.name user.team&.name
