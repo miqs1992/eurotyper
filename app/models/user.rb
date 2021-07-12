@@ -24,8 +24,6 @@ class User < ApplicationRecord
     true
   end
 
-  private
-
   def calculate(winner_id = nil, king_id = nil)
     new_points = bets.sum(:points)
     new_points += 7 if team_id && team_id == winner_id
@@ -35,6 +33,8 @@ class User < ApplicationRecord
       exact_bet_count: bets.exact.count
     )
   end
+
+  private
 
   def stop_bet_time
     return unless MatchDay.where("stop_bet_time < ?", Time.current).any?
