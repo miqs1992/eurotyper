@@ -1,0 +1,20 @@
+databases:
+  - name: typer2022
+    databaseName: typer2022
+    user: typer2022
+    plan: free
+
+services:
+  - type: web
+    name: typer2022
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: typer2022
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
