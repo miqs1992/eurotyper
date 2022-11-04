@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
-  database: eurotyper_production
-  username: eurotyper
-  password: <%= ENV['EUROTYPER_DATABASE_PASSWORD'] %>
+  url: <%= ENV["DATABASE_URL"] %>
+  database: railwayapp_production
+  username: railwayapp
+  password: <%= ENV["RAILWAYAPP_DATABASE_PASSWORD"] %>
