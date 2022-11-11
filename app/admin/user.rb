@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
-  permit_params :name, :email, :password
+  permit_params :name, :email
 
   form do |f|
     f.semantic_errors
     f.inputs do
       f.input :email
       f.input :name
-      f.input :password
     end
     f.actions
   end
@@ -31,5 +30,13 @@ ActiveAdmin.register User do
   collection_action :calculate, title: "Re-calculate users", method: :post do
     User.calculate
     redirect_to admin_users_path, notice: "Users recalculated!"
+  end
+
+  controller do
+    def create
+      User.invite!(permitted_params[:user], current_user)
+
+      redirect_to admin_users_path
+    end
   end
 end

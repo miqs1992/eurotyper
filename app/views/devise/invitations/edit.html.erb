@@ -1,0 +1,22 @@
+<main class="devise">
+  <div class="form-signin">
+    <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.hidden_field :invitation_token, readonly: true %>
+      <% if alert %>
+        <div class="alert alert-danger" role="alert"><%= alert %></div>
+      <% end %>
+      <h1 class="h3 mb-3 fw-normal">Set your password</h1>
+      
+      <%= f.label :password, class: "visually-hidden" %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder:  "New password" %>
+
+      <%= f.label :password_confirmation,class: "visually-hidden" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder:  "Confirm new password" %>
+
+      <button class="w-100 btn btn-lg btn-primary my-3" type="submit">
+        <%= t("devise.invitations.edit.submit_button") %>
+      </button>
+      <%= render "devise/shared/links" %>
+    <% end %>
+  </div>
+</main>
