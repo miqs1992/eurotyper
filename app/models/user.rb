@@ -4,7 +4,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable,
-         :rememberable, :validatable, :trackable, :invitable
+         :rememberable, :validatable, :trackable, :invitable,
+         :omniauthable, omniauth_providers: [:google_oauth2]
 
   belongs_to :player, optional: true
   belongs_to :team, optional: true
@@ -32,6 +33,10 @@ class User < ApplicationRecord
       points: new_points,
       exact_bet_count: bets.exact.count
     )
+  end
+
+  def self.from_omniauth(auth)
+    find_by(email: auth.info.email)
   end
 
   private

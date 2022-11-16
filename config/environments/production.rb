@@ -121,8 +121,8 @@ Rails.application.configure do
     domain: 'gmail.com',
     authentication: 'plain',
     enable_starttls_auto: true,
-    user_name: ENV['SMPT_USER'],
-    password: ENV['SMPT_PASSWORD']
+    user_name: Rails.application.credentials.smtp[:user],
+    password: Rails.application.credentials.smtp[:password]
   }
 
   config.action_mailer.default_url_options = { host: ENV['RENDER_EXTERNAL_URL'] }

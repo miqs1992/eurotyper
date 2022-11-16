@@ -15,7 +15,10 @@ gem "puma", "~> 5.0"
 gem "rails", "~> 6.1"
 gem "sass-rails", ">= 6"
 gem "webpacker", "~> 5.0"
-gem 'devise_invitable', '~> 2.0.0'
+gem "devise_invitable", '~> 2.0.0'
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
@@ -29,6 +32,7 @@ group :development, :test do
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
   gem "webdrivers"
+  gem "dotenv-rails"
 end
 
 group :development do
