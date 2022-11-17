@@ -21,7 +21,7 @@
     <% end %>
 
     <%= form_for "Login", url: omniauth_authorize_path(resource_name, :google_oauth2), method: :post do |f| %>
-        <%= f.submit "Login", type: "image", src: url_for("/assets/google.png"), class: 'mt-3' %>
+        <%= f.submit "Login", type: "image", src: image_url("google.png"), class: 'mt-3' %>
     <% end %>
   </div>
 </main>
