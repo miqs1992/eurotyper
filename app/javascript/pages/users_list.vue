@@ -55,7 +55,7 @@ export default {
     return {
       users: [],
       loading: true,
-      per: 20
+      per: 30
     }
   },
 
