@@ -20,4 +20,12 @@ ActiveAdmin.register Match do
     end
     f.actions
   end
+
+  controller do
+    def update
+      update! do |format|
+        format.html { redirect_to admin_match_day_path(resource.match_day_id), notice: 'Match updated!' } if resource.valid?
+      end
+    end
+  end
 end

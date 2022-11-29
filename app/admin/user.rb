@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
-  permit_params :name, :email
+  permit_params :name, :email, :paid
 
   form do |f|
     f.semantic_errors
     f.inputs do
       f.input :email
       f.input :name
+      f.input :paid
     end
     f.actions
   end
@@ -18,6 +19,7 @@ ActiveAdmin.register User do
     column :email
     column :points
     column :exact_bet_count
+    column :paid
     column :league_rank
     column :sign_in_count
     actions
