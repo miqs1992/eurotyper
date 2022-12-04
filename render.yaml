@@ -7,6 +7,7 @@ databases:
 services:
   - type: web
     name: typer2022
+    region: frankfurt
     env: ruby
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"

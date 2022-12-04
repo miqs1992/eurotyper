@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
   }
   root to: 'home#index'
+  get '/health', to: 'home#health'
 
   resources :rounds, only: :show do
     collection do
