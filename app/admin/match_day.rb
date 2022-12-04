@@ -14,7 +14,7 @@ ActiveAdmin.register MatchDay do
     end
 
     resource.calculate
-    redirect_to admin_users_path(resource),
+    redirect_to admin_users_path,
                 notice: "Match day calculated! Now recalculate users!"
   end
 
